@@ -1,5 +1,5 @@
 ## wspaker
-single header lib, for packing binary data into weak singal protocols with universal formatting
+paker.hpp - single header lib, for packing binary data into weak singal protocols with universal formatting
 
 ### example of packing data into ft4/ft8 CQ frame format
 utils/paker_test.cpp
