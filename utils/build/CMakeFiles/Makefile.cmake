@@ -46,4 +46,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/paker_test.dir/DependInfo.cmake"
+  "CMakeFiles/paker_py.dir/DependInfo.cmake"
   )

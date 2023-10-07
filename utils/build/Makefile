@@ -129,6 +129,19 @@ paker_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/paker_test.dir/build.make CMakeFiles/paker_test.dir/build
 .PHONY : paker_test/fast
 
+#=============================================================================
+# Target rules for targets named paker_py
+
+# Build rule for target.
+paker_py: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 paker_py
+.PHONY : paker_py
+
+# fast build rule for target.
+paker_py/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/paker_py.dir/build.make CMakeFiles/paker_py.dir/build
+.PHONY : paker_py/fast
+
 paker_test.o: paker_test.cpp.o
 .PHONY : paker_test.o
 
@@ -153,6 +166,30 @@ paker_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/paker_test.dir/build.make CMakeFiles/paker_test.dir/paker_test.cpp.s
 .PHONY : paker_test.cpp.s
 
+py_lib.o: py_lib.cpp.o
+.PHONY : py_lib.o
+
+# target to build an object file
+py_lib.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/paker_py.dir/build.make CMakeFiles/paker_py.dir/py_lib.cpp.o
+.PHONY : py_lib.cpp.o
+
+py_lib.i: py_lib.cpp.i
+.PHONY : py_lib.i
+
+# target to preprocess a source file
+py_lib.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/paker_py.dir/build.make CMakeFiles/paker_py.dir/py_lib.cpp.i
+.PHONY : py_lib.cpp.i
+
+py_lib.s: py_lib.cpp.s
+.PHONY : py_lib.s
+
+# target to generate assembly for a file
+py_lib.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/paker_py.dir/build.make CMakeFiles/paker_py.dir/py_lib.cpp.s
+.PHONY : py_lib.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -161,10 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... paker_py"
 	@echo "... paker_test"
 	@echo "... paker_test.o"
 	@echo "... paker_test.i"
 	@echo "... paker_test.s"
+	@echo "... py_lib.o"
+	@echo "... py_lib.i"
+	@echo "... py_lib.s"
 .PHONY : help
 
 

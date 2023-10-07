@@ -21,7 +21,6 @@ struct __packed TDiagnosticsFrame
    static constexpr auto FrameId = 1;
    unsigned char u3FrameId : 3;
    unsigned char u5TelemetryBits : 5;
-   unsigned short u16RstCnt;
    unsigned short s16Voltage;
    char s8Temperature;
 };
@@ -36,11 +35,20 @@ struct __packed TPositionFrame
    unsigned short u16Alt;
 };
 
+struct __packed TSuperFrame
+{
+   TPositionFrame Position;
+   TDiagnosticsFrame Diagnostics;
+};
+
 CFT4PacketFactory PacketFactory;
 int main()
 {
-   TRawFrame RawFrame = {-22, -3949211, 12233};
-   auto const FtFramesCnt = PacketFactory.EncodeRaw((unsigned char *)&RawFrame, sizeof(TRawFrame) * 8);
+   TSuperFrame RawFrame;
+   RawFrame.Position.u3FrameId = TPositionFrame::FrameId;
+   RawFrame.Diagnostics.u3FrameId = TDiagnosticsFrame::FrameId;
+   
+   auto const FtFramesCnt = PacketFactory.EncodeRaw((unsigned char *)&RawFrame, sizeof(RawFrame) * 8);
    cout << "\npaker format: " << CFT4PacketFactory::TFT4Format::GetPattern() << endl;
    cout << "frame permutations: " << CFT4PacketFactory::TFT4Format::GetMaxPermutations() << endl;
    cout << "frame bitsize ffloor: " << CFT4PacketFactory::TFT4Format::GetBitSizeFloor() << endl;

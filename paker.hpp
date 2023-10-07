@@ -240,10 +240,10 @@ namespace Protocol
 
       class CFT4PacketFactory
       {
-         static constexpr char FT4FormatStr[] = "CQ 4NSxxx llUU";
-         static constexpr auto MaxFt4Subframes = 8;
+         static constexpr char FT4FormatStr[] = "CQ 4NSxxxxxxx";
 
       public:
+         static constexpr auto MaxFt4Subframes = 8;
          using TFT4Format = CFormatWithDefaultElements<FT4FormatStr>;
          using CFT4Encoder = TEncoder<TFT4Format, MaxFt4Subframes>;
          char C8Frames[MaxFt4Subframes][TFT4Format::GetLen() + 1];
