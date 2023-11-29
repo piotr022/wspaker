@@ -1,0 +1,2 @@
+/home/piotr/dev/wspaker/build/CMakeFiles/edit_cache.dir
+/home/piotr/dev/wspaker/build/CMakeFiles/rebuild_cache.dir

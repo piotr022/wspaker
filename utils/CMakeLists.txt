@@ -12,6 +12,10 @@ project(paker_utils)
 add_executable(paker_test paker_test.cpp)
 target_link_libraries(paker_test wspaker)
 
+add_executable(sfd decoder.cpp)
+target_link_libraries(paker_test wspaker)
+
+
 add_library(paker_py SHARED py_lib.cpp)
 target_link_libraries(paker_py wspaker)
 set_target_properties(paker_py PROPERTIES POSITION_INDEPENDENT_CODE ON)

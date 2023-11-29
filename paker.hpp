@@ -138,6 +138,9 @@ namespace Protocol
          char (&OutBuffors)[BuffersCnt][FormatT::GetLen() + 1];
 
       public:
+         static constexpr auto MaxSubframes = BuffersCnt;
+         using Format = FormatT;
+
          template <unsigned int N>
          TEncoder(char (&outStrArrs)[BuffersCnt][N]) : OutBuffors(outStrArrs){};
 
@@ -223,7 +226,7 @@ namespace Protocol
       struct TPatternFormats
       {
          TPatternFormats() = delete;
-         static constexpr auto DefElmCnt = 6;
+         static constexpr auto DefElmCnt = 8;
          static constexpr TFormatElement DefaultFormatElements[DefElmCnt] =
              {
                  {'0', 1, " "},          // nothing
@@ -232,44 +235,112 @@ namespace Protocol
                  {'X', 36, "ABCDEFGHIJKLMNOPRSTQUWXYVZ0123456789"},
                  {'l', 18, "ABCDEFGHIJKLMNOPQR"},
                  {'U', 10, "0123456789"},
+                 {'P', 28, "ABCDEFGHIJKLMNOPQRSTUVWXYZab"},
+                 {'s', 3, "01Q"}, // seq for wspr
          };
       };
 
       template <const char pattern[]>
       using CFormatWithDefaultElements = CFormat<TPatternFormats::DefElmCnt, TPatternFormats::DefaultFormatElements, pattern>;
 
-      class CFT4PacketFactory
+      // class CFT4PacketFactory
+      // {
+      //    static constexpr char FT4FormatStr[] = "CQ 4NSxxxxxxx";
+
+      // public:
+      //    static constexpr auto MaxFt4Subframes = 8;
+      //    using TFT4Format = CFormatWithDefaultElements<FT4FormatStr>;
+      //    using CFT4Encoder = TEncoder<TFT4Format, MaxFt4Subframes>;
+      //    char C8Frames[MaxFt4Subframes][TFT4Format::GetLen() + 1];
+      //    CFT4Encoder FT4Encoder;
+
+      //    unsigned char u8EncodedFrames = 0;
+      //    CFT4PacketFactory() : FT4Encoder(C8Frames){};
+
+      //    const char *GetPacket(unsigned int u32Idx)
+      //    {
+      //       if (u32Idx >= MaxFt4Subframes)
+      //          return "NOT VALID";
+
+      //       return C8Frames[u32Idx];
+      //    }
+
+      //    bool AppendWsFrame(const char *p8WsFrame)
+      //    {
+      //       auto const SeqIdx = TFT4Format::GetSeqNrIdx();
+      //       if (strlen(p8WsFrame) != TFT4Format::GetLen() ||
+      //           p8WsFrame[SeqIdx] < '0' || p8WsFrame[SeqIdx] > '9')
+      //          return false;
+
+      //       auto const FrameNr = p8WsFrame[SeqIdx] - '0';
+
+      //       memcpy(C8Frames[FrameNr], p8WsFrame, TFT4Format::GetLen());
+      //       return true;
+      //    }
+
+      //    unsigned int EncodeRaw(unsigned char *p8Data, unsigned int u32BitLen)
+      //    {
+      //       u8EncodedFrames = FT4Encoder.EncodeBigEndian(p8Data, u32BitLen);
+      //       return u8EncodedFrames;
+      //    }
+
+      //    unsigned int DecodeFrames(unsigned char u8FramesToDecode, unsigned char *pOutData, unsigned int u32OutBuffLen)
+      //    {
+      //       return FT4Encoder.DecodeBigEndian(u8FramesToDecode, pOutData, u32OutBuffLen);
+      //    }
+      // };
+
+      template <class CEncoder>
+      class CPacketFactoryT
       {
-         static constexpr char FT4FormatStr[] = "CQ 4NSxxxxxxx";
-
       public:
-         static constexpr auto MaxFt4Subframes = 8;
-         using TFT4Format = CFormatWithDefaultElements<FT4FormatStr>;
-         using CFT4Encoder = TEncoder<TFT4Format, MaxFt4Subframes>;
-         char C8Frames[MaxFt4Subframes][TFT4Format::GetLen() + 1];
-         CFT4Encoder FT4Encoder;
-
+         using Format = typename CEncoder::Format;
+         char C8Frames[CEncoder::MaxSubframes][Format::GetLen() + 1];
+         CEncoder Encoder;
          unsigned char u8EncodedFrames = 0;
-         CFT4PacketFactory() : FT4Encoder(C8Frames){};
+
+         CPacketFactoryT() : Encoder(C8Frames){};
 
          const char *GetPacket(unsigned int u32Idx)
          {
-            if (u32Idx >= MaxFt4Subframes)
+            if (u32Idx >= CEncoder::MaxSubframes)
                return "NOT VALID";
 
             return C8Frames[u32Idx];
          }
 
+         bool AppendWsFrame(const char *p8WsFrame)
+         {
+            auto const SeqIdx = Format::GetSeqNrIdx();
+            if (strlen(p8WsFrame) != Format::GetLen() ||
+                p8WsFrame[SeqIdx] < '0' || p8WsFrame[SeqIdx] > '9')
+               return false;
+
+            auto const FrameNr = p8WsFrame[SeqIdx] - '0';
+
+            memcpy(C8Frames[FrameNr], p8WsFrame, Format::GetLen());
+            return true;
+         }
+
          unsigned int EncodeRaw(unsigned char *p8Data, unsigned int u32BitLen)
          {
-            u8EncodedFrames = FT4Encoder.EncodeBigEndian(p8Data, u32BitLen);
+            u8EncodedFrames = Encoder.EncodeBigEndian(p8Data, u32BitLen);
             return u8EncodedFrames;
          }
 
          unsigned int DecodeFrames(unsigned char u8FramesToDecode, unsigned char *pOutData, unsigned int u32OutBuffLen)
          {
-            return FT4Encoder.DecodeBigEndian(u8FramesToDecode, pOutData, u32OutBuffLen);
+            return Encoder.DecodeBigEndian(u8FramesToDecode, pOutData, u32OutBuffLen);
          }
       };
+
+      template <const char C8Format[], unsigned int MaxElements> 
+      using CPacketFactory = CPacketFactoryT<TEncoder<CFormatWithDefaultElements<C8Format>, MaxElements>>;
+ 
+      static constexpr char Ft4FromatString[] = "CQ 4NSxxxxxxx";
+      using CFT4PacketFactory = CPacketFactory<Ft4FromatString, 8>;
+
+      static constexpr char WsprFormatString[] = "CQ SUUxxx llUU P";
+      using CWsprPacketFactory = CPacketFactory<WsprFormatString, 8>;
    }
 }

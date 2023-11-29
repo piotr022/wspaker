@@ -4,61 +4,33 @@
 #include "../paker.hpp"
 #include <iostream>
 #include <string>
-#include <iomanip> // Dla std::setw i std::setfill
+#include <iomanip>
+#include "telemetry.hpp"
 
 using namespace std;
 using namespace Protocol::Paker;
 
-struct __attribute__((packed, aligned(4))) TRawFrame
-{
-   int32_t s32Lat;
-   int32_t s32Lon;
-   uint16_t u16Alt;
-};
+CWsprPacketFactory PacketFactory;
+// CWsprPacketFactory WsprPacketFactory;
 
-struct __packed TDiagnosticsFrame
-{
-   static constexpr auto FrameId = 1;
-   unsigned char u3FrameId : 3;
-   unsigned char u5TelemetryBits : 5;
-   unsigned short s16Voltage;
-   char s8Temperature;
-};
-
-struct __packed TPositionFrame
-{
-   static constexpr auto FrameId = 0;
-   unsigned char u3FrameId : 3;
-   unsigned char u5TelemetryBits : 5;
-   int s32Lon;
-   int s32Lat;
-   unsigned short u16Alt;
-};
-
-struct __packed TSuperFrame
-{
-   TPositionFrame Position;
-   TDiagnosticsFrame Diagnostics;
-};
-
-CFT4PacketFactory PacketFactory;
 int main()
 {
    TSuperFrame RawFrame;
-   RawFrame.Position.u3FrameId = TPositionFrame::FrameId;
-   RawFrame.Diagnostics.u3FrameId = TDiagnosticsFrame::FrameId;
+   memset(&RawFrame, 0xFF, sizeof(RawFrame));
+   // RawFrame.Position.u3FrameId = TPositionFrame::FrameId;
+   // RawFrame.Diagnostics.u3FrameId = TDiagnosticsFrame::FrameId;
    
    auto const FtFramesCnt = PacketFactory.EncodeRaw((unsigned char *)&RawFrame, sizeof(RawFrame) * 8);
-   cout << "\npaker format: " << CFT4PacketFactory::TFT4Format::GetPattern() << endl;
-   cout << "frame permutations: " << CFT4PacketFactory::TFT4Format::GetMaxPermutations() << endl;
-   cout << "frame bitsize ffloor: " << CFT4PacketFactory::TFT4Format::GetBitSizeFloor() << endl;
+   cout << "\npaker format: " << CFT4PacketFactory::Format::GetPattern() << endl;
+   cout << "frame permutations: " << CFT4PacketFactory::Format::GetMaxPermutations() << endl;
+   cout << "frame bitsize ffloor: " << CFT4PacketFactory::Format::GetBitSizeFloor() << endl;
    cout << "specific base: ";
    ;
 
-   const char *pattern = CFT4PacketFactory::TFT4Format::GetPattern();
+   const char *pattern = CFT4PacketFactory::Format::GetPattern();
    for (int i = 0; i < strlen(pattern); i++)
    {
-      cout << pattern[i] << "=" << CFT4PacketFactory::TFT4Format::GetBase(pattern[i]) << " ";
+      cout << pattern[i] << "=" << CFT4PacketFactory::Format::GetBase(pattern[i]) << " ";
    }
    cout << endl
         << endl;
