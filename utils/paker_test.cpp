@@ -10,27 +10,22 @@
 using namespace std;
 using namespace Protocol::Paker;
 
-CWsprPacketFactory PacketFactory;
-// CWsprPacketFactory WsprPacketFactory;
-
-int main()
+static int i32TestNr = 0;
+template<class Factory, class CTestData>
+void Test(Factory& PacketFactory, CTestData& RawFrame)
 {
-   TSuperFrame RawFrame;
-   memset(&RawFrame, 0xFF, sizeof(RawFrame));
-   // RawFrame.Position.u3FrameId = TPositionFrame::FrameId;
-   // RawFrame.Diagnostics.u3FrameId = TDiagnosticsFrame::FrameId;
-   
    auto const FtFramesCnt = PacketFactory.EncodeRaw((unsigned char *)&RawFrame, sizeof(RawFrame) * 8);
-   cout << "\npaker format: " << CFT4PacketFactory::Format::GetPattern() << endl;
-   cout << "frame permutations: " << CFT4PacketFactory::Format::GetMaxPermutations() << endl;
-   cout << "frame bitsize ffloor: " << CFT4PacketFactory::Format::GetBitSizeFloor() << endl;
+   cout << "\nSQ9P paker TEST NR: " << i32TestNr++ << endl;
+   cout << "paker format: " << CWsprPacketFactory::Format::GetPattern() << endl;
+   cout << "frame permutations: " << CWsprPacketFactory::Format::GetMaxPermutations() << endl;
+   cout << "frame bitsize floor: " << CWsprPacketFactory::Format::GetBitSizeFloor() << endl;
    cout << "specific base: ";
    ;
 
-   const char *pattern = CFT4PacketFactory::Format::GetPattern();
+   const char *pattern = CWsprPacketFactory::Format::GetPattern();
    for (int i = 0; i < strlen(pattern); i++)
    {
-      cout << pattern[i] << "=" << CFT4PacketFactory::Format::GetBase(pattern[i]) << " ";
+      cout << pattern[i] << "=" << CWsprPacketFactory::Format::GetBase(pattern[i]) << " ";
    }
    cout << endl
         << endl;
@@ -57,4 +52,17 @@ int main()
    }
 
    cout << endl;
+}
+
+int main()
+{
+   TPositionFrame RawFrame;
+   for(int i = 0; i < sizeof(RawFrame); i++)
+      ((unsigned char*)&RawFrame)[i] = i*4 + 31;
+
+   CWsprPacketFactory WsprPacketFactory;
+   CFT4PacketFactory Ft4PacketFactory;
+
+   Test(WsprPacketFactory, RawFrame);   
+   Test(Ft4PacketFactory, RawFrame);   
 }

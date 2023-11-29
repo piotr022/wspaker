@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/sfd.dir/decoder.cpp.o -o sfd 

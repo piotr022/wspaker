@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -shared -Wl,-soname,libpaker_py.so -o libpaker_py.so CMakeFiles/paker_py.dir/py_lib.cpp.o 
