@@ -249,12 +249,22 @@ namespace Protocol
                  {'U', 10, "0123456789"},
                  {'P', 28, "ABCDEFGHIJKLMNOPQRSTUVWXYZab"},
          };
+
+         static constexpr auto Jt9ElmCnt = 3;
+         static constexpr TFormatElement Jt9FormatElements[Jt9ElmCnt] =
+             {
+                 {'0', 1, " "},          // nothing
+                 {'S', 1, "01Q"},        // sequence number
+                 {'J', 42, "ABCDEFGHIJKLMNOPRSTQUWXYVZ0123456789 +=./?"},
+         };
       };
 
       template <const char pattern[]>
       using CFormatWithDefaultElementsT = CFormat<TPatternFormats::DefElmCnt, TPatternFormats::DefaultFormatElements, pattern>;
       template <const char pattern[]>
       using CWsprFormatT = CFormat<TPatternFormats::WsprElmCnt, TPatternFormats::WsprFormatElements, pattern>;
+      template <const char pattern[]>
+      using CJt9Format = CFormat<TPatternFormats::Jt9ElmCnt, TPatternFormats::Jt9FormatElements, pattern>;
 
       template <class CEncoder>
       class CPacketFactoryT
@@ -308,5 +318,8 @@ namespace Protocol
 
       static constexpr char WsprFormatString[] = "CQ SUUxxx llUU P";
       using CWsprPacketFactory = CPacketFactory<WsprFormatString, CWsprFormatT, 8>;
+
+      static constexpr char Jt9FormatString[] = "JJJJJJJJJJJJJ";
+      using CJt9PacketFactory = CPacketFactory<Jt9FormatString, CJt9Format, 8>;
    }
 }
