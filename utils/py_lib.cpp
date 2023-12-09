@@ -13,9 +13,8 @@ extern "C"
 
       if (!p8Frames ||
           !u8FramesCount ||
-          u8FramesCount > CFT4PacketFactory::MaxFt4Subframes ||
           !pOut ||
-          u16BuffLen * 8 < u8FramesCount * CFT4PacketFactory::TFT4Format::GetBitSizeFloor())
+          u16BuffLen * 8 < u8FramesCount * CFT4PacketFactory::Format::GetBitSizeFloor())
       {
          return;
       }
@@ -24,9 +23,22 @@ extern "C"
       for (uint8_t i = 0; i < u8FramesCount; i++)
       {
          memcpy(PacketFactory.C8Frames, p8Frames[i],
-            std::min(strlen(p8Frames[i]), CFT4PacketFactory::TFT4Format::GetLen()));
+            std::min(strlen(p8Frames[i]), CFT4PacketFactory::Format::GetLen()));
       }
 
       PacketFactory.DecodeFrames(u8FramesCount, pOut, u16BuffLen);
+   }
+
+   void DecodeWsprFrame(char* S8Frame, uint8_t* p8Out)
+   {
+      CWsprPacketFactory PacketFactory;
+      if(!S8Frame || !p8Out)
+         return;
+
+      memset(PacketFactory.C8Frames, 0, sizeof(PacketFactory.C8Frames));
+      memcpy(PacketFactory.C8Frames[0], S8Frame, CWsprPacketFactory::Format::GetLen());
+
+      PacketFactory.DecodeFrames(1, p8Out, 256);
+      // memcpy(p8Out, S8Frame, strlen(S8Frame));
    }
 }

@@ -1,7 +1,7 @@
-/home/piotr/dev/wspaker/utils/build/CMakeFiles/paker_test.dir
-/home/piotr/dev/wspaker/utils/build/CMakeFiles/sfd.dir
-/home/piotr/dev/wspaker/utils/build/CMakeFiles/paker_py.dir
-/home/piotr/dev/wspaker/utils/build/CMakeFiles/edit_cache.dir
-/home/piotr/dev/wspaker/utils/build/CMakeFiles/rebuild_cache.dir
-/home/piotr/dev/wspaker/utils/build/wspaker/CMakeFiles/edit_cache.dir
-/home/piotr/dev/wspaker/utils/build/wspaker/CMakeFiles/rebuild_cache.dir
+/home/piotr/dev/pskfetcher/wspaker/utils/build/CMakeFiles/paker_test.dir
+/home/piotr/dev/pskfetcher/wspaker/utils/build/CMakeFiles/sfd.dir
+/home/piotr/dev/pskfetcher/wspaker/utils/build/CMakeFiles/paker_py.dir
+/home/piotr/dev/pskfetcher/wspaker/utils/build/CMakeFiles/edit_cache.dir
+/home/piotr/dev/pskfetcher/wspaker/utils/build/CMakeFiles/rebuild_cache.dir
+/home/piotr/dev/pskfetcher/wspaker/utils/build/wspaker/CMakeFiles/edit_cache.dir
+/home/piotr/dev/pskfetcher/wspaker/utils/build/wspaker/CMakeFiles/rebuild_cache.dir

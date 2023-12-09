@@ -1,5 +1,5 @@
-CMakeFiles/paker_test.dir/paker_test.cpp.o: \
- /home/piotr/dev/pskfetcher/wspaker/utils/paker_test.cpp \
+CMakeFiles/sfd.dir/decoder.cpp.o: \
+ /home/piotr/dev/pskfetcher/wspaker/utils/decoder.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/cstdint \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \

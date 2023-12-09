@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/piotr/dev/wspaker/utils
+CMAKE_SOURCE_DIR = /home/piotr/dev/pskfetcher/wspaker/utils
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/piotr/dev/wspaker/utils/build
+CMAKE_BINARY_DIR = /home/piotr/dev/pskfetcher/wspaker/utils/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/piotr/dev/wspaker/utils/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/piotr/dev/wspaker/utils/build/CMakeFiles /home/piotr/dev/wspaker/utils/build/wspaker//CMakeFiles/progress.marks
-	cd /home/piotr/dev/wspaker/utils/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wspaker/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/piotr/dev/wspaker/utils/build/CMakeFiles 0
+	cd /home/piotr/dev/pskfetcher/wspaker/utils/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/piotr/dev/pskfetcher/wspaker/utils/build/CMakeFiles /home/piotr/dev/pskfetcher/wspaker/utils/build/wspaker//CMakeFiles/progress.marks
+	cd /home/piotr/dev/pskfetcher/wspaker/utils/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wspaker/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/piotr/dev/pskfetcher/wspaker/utils/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/piotr/dev/wspaker/utils/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wspaker/clean
+	cd /home/piotr/dev/pskfetcher/wspaker/utils/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wspaker/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,17 +103,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/piotr/dev/wspaker/utils/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wspaker/preinstall
+	cd /home/piotr/dev/pskfetcher/wspaker/utils/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wspaker/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/piotr/dev/wspaker/utils/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wspaker/preinstall
+	cd /home/piotr/dev/pskfetcher/wspaker/utils/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wspaker/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/piotr/dev/wspaker/utils/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/piotr/dev/pskfetcher/wspaker/utils/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -135,6 +135,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/piotr/dev/wspaker/utils/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/piotr/dev/pskfetcher/wspaker/utils/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

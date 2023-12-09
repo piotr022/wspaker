@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/piotr/dev/wspaker/utils/paker_test.cpp" "CMakeFiles/paker_test.dir/paker_test.cpp.o" "gcc" "CMakeFiles/paker_test.dir/paker_test.cpp.o.d"
+  "/home/piotr/dev/pskfetcher/wspaker/utils/paker_test.cpp" "CMakeFiles/paker_test.dir/paker_test.cpp.o" "gcc" "CMakeFiles/paker_test.dir/paker_test.cpp.o.d"
   )
 
 # Targets to which this target links.

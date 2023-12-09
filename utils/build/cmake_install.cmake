@@ -1,4 +1,4 @@
-# Install script for directory: /home/piotr/dev/wspaker/utils
+# Install script for directory: /home/piotr/dev/pskfetcher/wspaker/utils
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/piotr/dev/wspaker/utils/build/wspaker/cmake_install.cmake")
+  include("/home/piotr/dev/pskfetcher/wspaker/utils/build/wspaker/cmake_install.cmake")
 
 endif()
 
@@ -56,5 +56,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/piotr/dev/wspaker/utils/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/piotr/dev/pskfetcher/wspaker/utils/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

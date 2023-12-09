@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -Dpaker_py_EXPORTS
 
-CXX_INCLUDES = -I/home/piotr/dev/wspaker/.
+CXX_INCLUDES = -I/home/piotr/dev/pskfetcher/wspaker/.
 
 CXX_FLAGS = -fPIC
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/piotr/dev/wspaker
+# Install script for directory: /home/piotr/dev/pskfetcher/wspaker
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

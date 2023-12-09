@@ -247,7 +247,7 @@ namespace Protocol
                  {'X', 36, "ABCDEFGHIJKLMNOPRSTQUWXYVZ0123456789"},
                  {'l', 18, "ABCDEFGHIJKLMNOPQR"},
                  {'U', 10, "0123456789"},
-                 {'P', 28, "ABCDEFGHIJKLMNOPQRSTUVWXYZab"},
+                 {'P', 19, "ABCDEFGHIJKLMNOPQRS"},
          };
 
          static constexpr auto Jt9ElmCnt = 3;
@@ -316,7 +316,7 @@ namespace Protocol
       static constexpr char Ft4FromatString[] = "CQ 4NSxxxxxxx";
       using CFT4PacketFactory = CPacketFactory<Ft4FromatString,CFormatWithDefaultElementsT, 8>;
 
-      static constexpr char WsprFormatString[] = "CQ SUUxxx llUU P";
+      static constexpr char WsprFormatString[] = "SUUxxx llUU P";
       using CWsprPacketFactory = CPacketFactory<WsprFormatString, CWsprFormatT, 8>;
 
       static constexpr char Jt9FormatString[] = "JJJJJJJJJJJJJ";

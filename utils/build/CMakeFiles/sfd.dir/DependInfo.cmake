@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/piotr/dev/wspaker/utils/decoder.cpp" "CMakeFiles/sfd.dir/decoder.cpp.o" "gcc" "CMakeFiles/sfd.dir/decoder.cpp.o.d"
+  "/home/piotr/dev/pskfetcher/wspaker/utils/decoder.cpp" "CMakeFiles/sfd.dir/decoder.cpp.o" "gcc" "CMakeFiles/sfd.dir/decoder.cpp.o.d"
   )
 
 # Targets to which this target links.
